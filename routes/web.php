@@ -23,5 +23,6 @@ Route::get('/frontend/{path?}', function () {
 
 // Redirect to angular frontend app
 Route::get('/', function () {
-    return redirect()->route('ng-frontend');
+    //return redirect()->route('ng-frontend');
+    return view('homepage');
 });

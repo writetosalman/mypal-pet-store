@@ -70,6 +70,25 @@ What it does is, it compiles angular project and copy assets and ng-frontend-tem
 
 This way your angular project is available as a view and you dont have to worry about the baseUrl which is automatically updated to route name defined in `web.php`
 
+## Manually Deploy To Heroku
+
+Heroku offers free hosting of your application. It is great for setting up a staging environment.
+
+I ran following commands to manually push to Heroku.
+
+```
+heroku create mypal-pet-store
+heroku buildpacks:set https://github.com/heroku/heroku-buildpack-php
+php artisan key:generate --show
+heroku config:set APP_KEY=base64:jZLa2MikYbH+BbXgibXjxdSsV+sXzva7DvzI/hS+nCo=
+heroku addons:create heroku-postgresql:hobby-dev
+heroku config:set DB_CONNECTION=pgsql
+git push heroku master
+heroku run php artisan migrate
+```
+
+You can run `heroku config` command to see all the config setup.
+ 
 ## License  
 
 MIT  
