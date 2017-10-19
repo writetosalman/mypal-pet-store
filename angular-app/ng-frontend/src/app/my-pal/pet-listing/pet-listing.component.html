@@ -1,0 +1,32 @@
+<div style="height:20px"></div>
+<div class="row">
+  <div class="col-12">
+    <h3>List of Pets rescued</h3>
+  </div>
+</div>
+
+<div *ngIf="loading">
+  <fa name="spinner" animation="spin" size="2x"></fa>
+</div>
+
+<div *ngIf="errorMsg" class="alert alert-info" role="alert" [innerHTML]="this.errorMsg">
+</div>
+
+<div *ngIf="loading==false && pets">
+  <div class="row cssOdd">
+    <div class="col-4"><b>Breed</b></div>
+    <div class="col-3"><b>Name</b></div>
+    <div class="col-2"></div>
+    <div class="col-3"></div>
+  </div>
+  <app-pet-list
+  *ngFor="let pet of pets
+  let index = index;
+  let isOdd = odd;
+  let isEven= even;"
+  [pet] ="pet"
+  [pets]="pets"
+
+  [ngClass]="{ cssOdd: isOdd, cssEven: isEven }"
+  ></app-pet-list>
+</div>

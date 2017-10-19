@@ -1,0 +1,38 @@
+<h2>Pet's Details</h2>
+
+<fa *ngIf="loading" name="spinner" animation="spin" size="2x"></fa>
+<div *ngIf="errorMsg" class="alert alert-danger" [innerHTML]="this.errorMsg"></div>
+
+<div *ngIf="loading == false && pet !== null">
+  <div class="row">
+    <div class="col-6">Breed</div>
+    <div class="col-6"><b>{{pet.breed}}</b></div>
+  </div>
+
+  <div class="row">
+    <div class="col-6">Age</div>
+    <div class="col-6">{{pet.age}} months</div>
+  </div>
+
+  <div *ngIf="pet !== null" class="row">
+    <div class="col-6">Name</div>
+    <div class="col-6">{{pet.name}}</div>
+  </div>
+
+  <div class="row">
+    <div class="col-6">Price</div>
+    <div class="col-6">AU$ {{pet.price}}</div>
+  </div>
+
+  <div class="row">
+    <div class="col-6">List Date</div>
+    <div class="col-6">{{ pet.list_date }}</div>
+  </div>
+
+  <div *ngIf="pet.sale_date!==null" class="row">
+    <div class="col-6">Sale Date</div>
+    <div class="col-6">{{ pet.sale_date }}</div>
+  </div>
+</div>
+
+<a href="" (click)="goBack();">&laquo; Back</a>

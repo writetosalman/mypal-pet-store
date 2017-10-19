@@ -1,0 +1,56 @@
+<h3>Add a new pet</h3>
+
+<form id="idForm" (submit)="onSubmit(salForm.value)" [formGroup]="salForm">
+    <div class="form-group">
+      <label for="idBreed">Breed</label>
+      <input type="text" class="form-control" id="idBreed" placeholder="Pet's breed" required
+      [formControl]="salForm.controls['breed']">
+      
+      <span *ngIf="breed.hasError('required') && breed.touched" class="badge badge-danger">Pet's breed is required</span>
+    </div>
+    <div class="form-group">
+      <label for="idAge">Age (months)</label>
+      <input type="number" class="form-control" id="idAge" placeholder="Age (in months)" required
+      [formControl]="salForm.controls['age']">
+
+      <span *ngIf="!age.valid && age.touched" class="badge badge-danger">Pet's age should be a number</span>
+      <span *ngIf="age.hasError('required') && age.touched" class="badge badge-danger">Pet's age is required</span>
+    </div>
+    <div class="form-group">
+      <label for="idName">Name  (optional)</label>
+      <input type="text" class="form-control" id="idName" placeholder="Pet name (optional)"
+      [formControl]="salForm.controls['name']">
+    </div>
+    <div class="form-group">
+      <label for="idPrice">Price (AU$)</label>
+      <input type="text" class="form-control" id="idPrice" placeholder="Price" required
+      [formControl]="salForm.controls['price']">
+
+      <span *ngIf="!price.valid && price.touched" class="badge badge-danger">Price should be of format 9.99 or 9</span>
+      <span *ngIf="price.hasError('required') && price.touched" class="badge badge-danger">Price is required</span>
+    </div>
+    <div class="form-group">
+      <label for="idListDate">List Date</label>
+      <input type="datetime-local" class="form-control" id="idListDate" placeholder="List Date" required
+      [formControl]="salForm.controls['listDate']">
+
+      <span *ngIf="!listDate.valid && listDate.touched" class="badge badge-danger">Please enter a valid list date. Format DD-MMM-YYYY HH:mm</span>
+      <span *ngIf="listDate.hasError('required') && listDate.touched" class="badge badge-danger">List date is required</span>
+    </div>
+    <div class="form-group">
+      <label for="idSaleDate">Sale Date (optional)</label>
+      <input type="datetime-local" class="form-control" id="idSaleDate" placeholder=""
+      [formControl]="salForm.controls['saleDate']">
+    </div>
+    <div class="form-group">
+      <div *ngIf="successMsg" class="alert alert-success" [innerHTML]="this.successMsg"></div>
+      <div *ngIf="errorMsg" class="alert alert-danger" [innerHTML]="this.errorMsg"></div>
+
+      <button class="btn btn-primary"> Save </button>
+      <fa *ngIf="loading" name="spinner" animation="spin" size="2x"></fa>
+
+    </div>
+
+</form>
+
+<a href="" (click)="goBack();">&laquo; Back</a>

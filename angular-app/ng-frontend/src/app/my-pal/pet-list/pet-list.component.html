@@ -1,0 +1,7 @@
+<div class="row">
+    <div class="col-4"><a [routerLink]="['/pet', pet.id]" >{{pet.breed}}</a></div>
+    <div class="col-3">{{pet.name}}</div>
+    <div class="col-2"><a [routerLink]="['/pet', pet.id, 'edit']" >Edit</a></div>
+    <div class="col-3"><a href="" (click)="handleDelete()">{{lblDelete}}</a></div>
+</div>
+<div *ngIf="errorMsg" class="alert alert-danger" [innerHTML]="this.errorMsg"></div>
