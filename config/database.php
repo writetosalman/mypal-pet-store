@@ -1,5 +1,21 @@
 <?php
 
+/**
+ * Get this value for heroku
+ */
+$pgsql_url        = '';
+$pgsql_host       = '';
+$pgsql_username   = '';
+$pgsql_password   = '';
+$pgsql_database   = '';
+if ( getenv("DATABASE_URL") != '' ) {
+    $pgsql_url        = parse_url(getenv("DATABASE_URL"));
+    $pgsql_host       = $pgsql_url["host"];
+    $pgsql_username   = $pgsql_url["user"];
+    $pgsql_password   = $pgsql_url["pass"];
+    $pgsql_database   = substr($pgsql_url["path"], 1);
+}
+
 return [
 
     /*
@@ -55,16 +71,16 @@ return [
         ],
 
         'pgsql' => [
-            'driver' => 'pgsql',
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '5432'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
-            'charset' => 'utf8',
-            'prefix' => '',
-            'schema' => 'public',
-            'sslmode' => 'prefer',
+            'driver'    => 'pgsql',
+            'port'      => env('DB_PORT', '5432'),
+            'host'      => $pgsql_host,
+            'database'  => $pgsql_database,
+            'username'  => $pgsql_username,
+            'password'  => $pgsql_password,
+            'charset'   => 'utf8',
+            'prefix'    => '',
+            'schema'    => 'public',
+            'sslmode'   => 'prefer',
         ],
 
         'sqlsrv' => [
