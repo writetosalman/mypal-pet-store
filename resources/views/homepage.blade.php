@@ -17,6 +17,7 @@
     <div class="row">
         <div class="col-12">
             <h1>My Pal Pet Store</h1>
+            <span class="pull-right">Hosted @ Heroku</span>
         </div>
     </div>
     <div class="row">
