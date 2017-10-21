@@ -21,6 +21,14 @@ jobs:
           name: composer-install
           command: composer install -n --prefer-dist
 
+      - run:
+          name: angular-install
+          command: cd angular-app/ng-frontend && npm install
+
+      - run:
+          name: angular-build
+          command: cd angular-app/ng-frontend && npm run build
+
       - save_cache:
           paths:
             - ./vendor
