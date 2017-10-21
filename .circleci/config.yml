@@ -20,12 +20,20 @@ jobs:
           - v1-dependencies-
 
       - run:
-          name: Setup Heroku
-          command: bash .circleci/setup-heroku.sh
+          name: NodeJs install
+          command: apk add --update nodejs
 
       - run:
           name: npm install
-          command: apk add --update nodejs
+          command: apk add --update npm
+
+      - run:
+          name: Heroku version
+          command: heroku --version
+
+      - run:
+          name: Setup Heroku
+          command: wget -qO- http://cli-assets.heroku.com/install-ubuntu.sh | sh
 
       - run:
           name: composer install
