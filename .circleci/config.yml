@@ -3,7 +3,8 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/php:7.1.8-browsers
+      - image: quay.io/ignited/php-nginx-fpm:7.0.19-latest
+
     working_directory: ~/mypal-pet-store
     steps:
       - checkout
@@ -16,6 +17,9 @@ jobs:
           - v1-dependencies-{{ checksum "composer.json" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
+      - run:
+          name: npm-install
+          command: apk add --update nodejs
 
       - run:
           name: composer-install
