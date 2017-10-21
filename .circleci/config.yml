@@ -20,20 +20,24 @@ jobs:
           - v1-dependencies-
 
       - run:
-          name: npm-install
+          name: Setup Heroku
+          command: bash .circleci/setup-heroku.sh
+
+      - run:
+          name: npm install
           command: apk add --update nodejs
 
       - run:
-          name: composer-install
+          name: composer install
           command: composer install -n --prefer-dist
 
-      - run:
-          name: angular-install
-          command: cd angular-app/ng-frontend && npm install
-
-      - run:
-          name: angular-build
-          command: cd angular-app/ng-frontend && npm run build
+#      - run:
+#          name: angular install
+#          command: cd angular-app/ng-frontend && npm install
+#
+#      - run:
+#          name: angular build
+#          command: cd angular-app/ng-frontend && npm run build
 
       - save_cache:
           paths:
@@ -50,7 +54,7 @@ jobs:
           name: Deploy Master to Heroku
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              cd public/ && ls -l -a
+              cat composer.lock
             fi
 
 workflows:
