@@ -45,11 +45,13 @@ jobs:
           name: php-testing
           command: vendor/bin/phpunit
 
-  deployment:
-    staging:
-      branch: master
-      heroku:
-        appname: mypal-pet-store
+      # now deploy
+      - deploy:
+          name: Deploy Master to Heroku
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              cd public/ && ls -l -a
+            fi
 
 workflows:
   version: 2
