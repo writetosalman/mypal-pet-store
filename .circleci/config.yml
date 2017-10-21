@@ -24,28 +24,20 @@ jobs:
           command: apk add --update nodejs
 
       - run:
-          name: npm install
-          command: apk add --update npm
-
-      - run:
-          name: Heroku version
-          command: heroku --version
-
-      - run:
-          name: Setup Heroku
-          command: wget -qO- http://cli-assets.heroku.com/install-ubuntu.sh | sh
+          name: sudo install
+          command: apk add --update sudo
 
       - run:
           name: composer install
           command: composer install -n --prefer-dist
 
-#      - run:
-#          name: angular install
-#          command: cd angular-app/ng-frontend && npm install
-#
-#      - run:
-#          name: angular build
-#          command: cd angular-app/ng-frontend && npm run build
+      - run:
+          name: angular install
+          command: cd angular-app/ng-frontend && npm install
+
+      - run:
+          name: angular build
+          command: cd angular-app/ng-frontend && npm run build
 
       - save_cache:
           paths:
@@ -62,8 +54,7 @@ jobs:
           name: Deploy Master to Heroku
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              git remote add heroku https://git.heroku.com/mypal-pet-store.git
-              git push heroku master
+              echo "move assets to AWS S3"
             fi
 
 workflows:
