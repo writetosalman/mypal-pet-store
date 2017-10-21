@@ -54,7 +54,8 @@ jobs:
           name: Deploy Master to Heroku
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              cat composer.lock
+              git remote add heroku https://git.heroku.com/mypal-pet-store.git
+              git push heroku master
             fi
 
 workflows:
